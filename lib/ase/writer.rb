@@ -7,7 +7,6 @@ class ASE
 
     def write!
       raise "Must specify an output file" if @file.nil?
-
       @file = File.new(@file, 'wb')
 
       palette_count = @palettes.length
@@ -66,6 +65,8 @@ class ASE
         @file.write_ushort 0xC002 # Group end
         @file.write_ulong 0 # Group end block
       end
+
+      @file.close
     end
 
     private

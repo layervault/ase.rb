@@ -52,5 +52,9 @@ class ASE
         write args.pack(info[:code] + '*')
       end
     end
+
+    def read_string(length)
+      read(length * 2).encode('UTF-8', 'UTF-16BE').delete("\00")
+    end
   end
 end
