@@ -9,8 +9,8 @@ class ASE
       raise "Must specify an output file" if @file.nil?
       @file = File.new(@file, 'wb')
 
-      palette_count = @palettes.length
-      color_count = @palettes.inject(0) { |sum, p| p.size }
+      palette_count = @palettes.keys.length
+      color_count = @palettes.values.map{ |p| p.size }.inject { |sum, i| sum + i }
 
       # Signature
       @file.write "ASEF"
