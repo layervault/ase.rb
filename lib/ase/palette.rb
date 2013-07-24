@@ -24,5 +24,13 @@ class ASE
       @colors.length
     end
     alias :size :length
+
+    def method_missing(method, *args, &block)
+      if @colors.has_key?(method.to_s)
+        return @colors[method.to_s]
+      end
+
+      super
+    end
   end
 end

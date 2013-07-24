@@ -28,4 +28,12 @@ class ASE
   def [](name)
     @palettes[name]
   end
+
+  def method_missing(method, *args, &block)
+    if @palettes.has_key?(method.to_s)
+      return @palettes[method.to_s]
+    end
+
+    super
+  end
 end
