@@ -6,6 +6,8 @@ class ASE
     end
 
     def write!
+      raise "Must specify an output file" if @file.nil?
+
       @file = File.new(@file, 'wb')
 
       palette_count = @palettes.length
