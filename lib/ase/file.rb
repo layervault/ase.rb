@@ -3,11 +3,11 @@ class ASE
     FORMATS = {
       ulonglong: {
         length: 8,
-        code: 'Q'
+        code: 'Q>'
       },
       longlong: {
         length: 8,
-        code: 'q'
+        code: 'q>'
       },
       double: {
         length: 8,
@@ -19,27 +19,27 @@ class ASE
       },
       uint: {
         length: 4,
-        code: 'L'
+        code: 'L>'
       },
       int: {
         length: 4,
-        code: 'l'
+        code: 'l>'
       },
       ushort: {
         length: 2,
-        code: 'S'
+        code: 'S>'
       },
       short: {
         length: 2,
-        code: 's'
+        code: 's>'
       },
       ulong: {
         length: 4,
-        code: 'L_'
+        code: 'L>'
       },
       long: {
         length: 4,
-        code: 'l_'
+        code: 'l>'
       }
     }
 

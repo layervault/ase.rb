@@ -24,36 +24,41 @@ class ASE
         # Block start
         @file.write_ushort 0xC001
 
-        title = palette.name.encode('UTF-8') + "\x00"
+        title = palette.name
 
-        # Length of the block title
-        buffer = [title.length / 2].pack('S')
-        buffer += title
+        # Block length (title is UTF-16 encoded)
+        @file.write_ulong 4 + (title.length * 2)
 
-        # Length of this block
-        @file.write_ulong buffer.length
-        @file.write buffer
+        # Title length
+        @file.write_ushort(title.length + 1)
+
+        # The title
+        @file.write title.encode('UTF-16BE')
+        @file.write 0x00
 
         palette.colors.each do |name, color|
           # Color start
           @file.write_ushort 1
 
-          # Color title
-          title = name.to_s.encode('UTF-8') + "\x00"
+          # Block length
+          @file.write_ulong 22 + (name.length * 2)
 
-          buffer = [title.length / 2].pack('S')
-          buffer += title
+          # Color name length
+          @file.write_ushort(name.length + 1)
+
+          # Color name
+          @file.write name.encode('UTF-16BE')
+          @file.write 0x00
+
+          # Color mode
+          @file.write 'RGB '
 
           # Colors
           rgb = color.to_rgb.map { |c| c / 255 }
-
-          buffer += "RGB "
-          rgb.each { |c| buffer += [c].pack('f').reverse }
-          buffer += "\x00"
-
-          # Length of color block
-          @file.write_ulong buffer.length
-          @file.write buffer
+          rgb.each { |c| @file.write_float(c) }
+          
+          # End of colors
+          @file.write 0x00
         end
 
         @file.write_ushort 0xC002 # Group end
