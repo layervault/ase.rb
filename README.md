@@ -18,16 +18,6 @@ Or install it yourself as:
 
 ## Usage
 
-**Reading**
-
-``` ruby
-doc = ASE.from_file('path/to/file.ase')
-
-# doc['Palette Name']['Color Name']
-puts doc['My Colors']['Red'].to_rgb
-#=> [255, 0, 0]
-```
-
 **Writing**
 
 ``` ruby
@@ -35,10 +25,22 @@ doc = ASE.new
 
 palette = ASE::Palette.new('My Colors')
 palette.add 'Black', ASE::Color.new(0, 0, 0)
-palette.add 'White', ASE::Color.from_hex('#ffffff')
+palette.add 'Red', ASE::Color.from_hex('#ff0000')
 
 doc << palette
 doc.to_file('path/to/file.ase')
+```
+
+**Reading**
+
+``` ruby
+doc = ASE.from_file('path/to/file.ase')
+
+puts doc['My Colors']['Red'].to_rgb
+#=> [255, 0, 0]
+
+puts doc['My Colors'].size
+#=> 2
 ```
 
 ## Contributing
