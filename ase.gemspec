@@ -5,11 +5,11 @@ require 'ase/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ase"
-  spec.version       = Ase::VERSION
+  spec.version       = ASE::VERSION
   spec.authors       = ["Ryan LeFevre"]
   spec.email         = ["meltingice8917@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Reader/writer for Adobe Swatch Exchange files}
+  spec.summary       = %q{Reader/writer for Adobe Swatch Exchange files}
   spec.homepage      = ""
   spec.license       = "MIT"
 
