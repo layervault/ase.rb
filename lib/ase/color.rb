@@ -32,6 +32,10 @@ class ASE
       [@r, @g, @b]
     end
 
+    def to_css
+      "rgba(#{r}, #{g}, #{b}, #{a})"
+    end
+
     def [](i)
       [@r, @g, @b, @a][i]
     end

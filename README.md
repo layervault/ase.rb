@@ -1,6 +1,6 @@
-# Ase
+# ASE.rb
 
-TODO: Write a gem description
+Reading and writing Adobe Swatch Exchange files in Ruby.
 
 ## Installation
 
@@ -18,7 +18,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+**Reading**
+
+``` ruby
+doc = ASE.from_file('path/to/file.ase')
+
+# doc['Palette Name']['Color Name']
+puts doc['My Colors']['Red'].to_rgb
+#=> [255, 0, 0]
+```
+
+**Writing**
+
+``` ruby
+doc = ASE.new
+
+palette = ASE::Palette.new('My Colors')
+palette.add 'Black', ASE::Color.new(0, 0, 0)
+palette.add 'White', ASE::Color.from_hex('#ffffff')
+
+doc << palette
+doc.to_file('path/to/file.ase')
+```
 
 ## Contributing
 
