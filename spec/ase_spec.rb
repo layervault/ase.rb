@@ -6,11 +6,13 @@ describe ASE do
   end
 
   it "is initialized with defaults" do
+    expect(@doc.palettes).to eq({})
     expect(@doc.palettes.length).to be 0
   end
 
   it "can add palettes" do
     @doc.add_palette ASE::Palette.new('Test')
+    @doc << ASE::Palette.new('Also Test')
   end
 
   describe ASE::Palette do

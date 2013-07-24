@@ -16,12 +16,16 @@ class ASE
 
   def initialize(file=nil)
     @file = file
-    @palettes = []
+    @palettes = {}
   end
 
   def add_palette(palette)
     raise "Can only pass an ASE::Palette" unless palette.is_a?(ASE::Palette)
-    @palettes << palette
+    @palettes[palette.name] = palette
   end
   alias :<< :add_palette
+
+  def [](name)
+    @palettes[name]
+  end
 end

@@ -67,7 +67,7 @@ class ASE
         # Group end block
         @file.seek 4, IO::SEEK_CUR
         
-        @palettes << palette
+        add_palette palette
         return true
       end
     end
