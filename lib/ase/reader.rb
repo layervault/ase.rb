@@ -41,8 +41,7 @@ class ASE
         block_start = @file.read_ushort
 
         title_block_size = @file.read_ulong
-        title_length = @file.read_ushort
-        title = @file.read_string(title_length)
+        title = @file.read_string
 
         palette = Palette.new(title)
         
@@ -52,10 +51,7 @@ class ASE
           break if color_start == 0xC002
 
           color_size = @file.read_ulong
-
-          color_name_length = @file.read_ushort
-          color_name = @file.read_string(color_name_length)
-
+          color_name = @file.read_string
           color_mode = @file.read(4)
 
           r, g, b = @file.read(12).scan(/.{1,4}/).map do |c|

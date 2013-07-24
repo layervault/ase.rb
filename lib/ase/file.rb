@@ -53,8 +53,19 @@ class ASE
       end
     end
 
-    def read_string(length)
+    def read_string
+      length = read_ushort
       read(length * 2).encode('UTF-8', 'UTF-16BE').delete("\00")
+    end
+
+    def write_string(string)
+      write_ushort(string.length + 1)
+      write string.encode('UTF-16BE')
+      write_null_byte
+    end
+
+    def write_null_byte
+      write [0].pack('S>')
     end
   end
 end

@@ -25,17 +25,11 @@ class ASE
         # Block start
         @file.write_ushort 0xC001
 
-        title = palette.name
-
         # Block length (title is UTF-16 encoded)
-        @file.write_ulong 4 + (title.length * 2)
+        @file.write_ulong 4 + (palette.name.length * 2)
 
-        # Title length
-        @file.write_ushort(title.length + 1)
-
-        # The title
-        @file.write title.encode('UTF-16BE')
-        @file.write null_byte
+        # Palette name
+        @file.write_string palette.name
 
         palette.colors.each do |name, color|
           # Color start
@@ -44,12 +38,8 @@ class ASE
           # Block length
           @file.write_ulong 22 + (name.length * 2)
 
-          # Color name length
-          @file.write_ushort(name.length + 1)
-
           # Color name
-          @file.write name.encode('UTF-16BE')
-          @file.write null_byte
+          @file.write_string name
 
           # Color mode
           @file.write 'RGB '
@@ -59,7 +49,7 @@ class ASE
           rgb.each { |c| @file.write [c].pack('F').reverse }
           
           # End of colors
-          @file.write null_byte
+          @file.write_null_byte
         end
 
         @file.write_ushort 0xC002 # Group end
@@ -67,12 +57,6 @@ class ASE
       end
 
       @file.close
-    end
-
-    private
-
-    def null_byte
-      [0].pack('S>')
     end
   end
 end
