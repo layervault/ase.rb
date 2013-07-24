@@ -1,6 +1,6 @@
 # ASE.rb
 
-Reading and writing Adobe Swatch Exchange files in Ruby.
+A general purpose library for reading and writing Adobe Swatch Exchange files in Ruby. ASE files can be used across the entire Adobe suite (Photoshop, Illustrator, etc).
 
 ## Installation
 
