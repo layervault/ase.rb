@@ -21,15 +21,15 @@ class ASE
       # Number of blocks
       @file.write_ulong(color_count + (palette_count * 2))
 
-      @palettes.each do |palette|
+      @palettes.each do |palette_name, palette|
         # Block start
         @file.write_ushort 0xC001
 
         # Block length (title is UTF-16 encoded)
-        @file.write_ulong 4 + (palette.name.length * 2)
+        @file.write_ulong 4 + (palette_name.length * 2)
 
         # Palette name
-        @file.write_string palette.name
+        @file.write_string palette_name
 
         palette.colors.each do |name, color|
           # Color start

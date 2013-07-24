@@ -11,6 +11,7 @@ class ASE
       @colors[name] = color
     end
     alias :[]= :add
+    alias :add_color :add
 
     def remove(name)
       @colors.delete(name)
