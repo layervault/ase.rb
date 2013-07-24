@@ -12,6 +12,8 @@ class ASE
   include Reader
   include Writer
 
+  attr_accessor :palettes
+
   def initialize(file=nil)
     @file = file
     @palettes = []

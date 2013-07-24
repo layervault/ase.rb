@@ -13,7 +13,7 @@ class ASE
     alias :[]= :add
 
     def remove(name)
-      @colors[name].delete
+      @colors.delete(name)
     end
 
     def [](i)
