@@ -45,7 +45,15 @@ class ASE
       colors = [@r, @g, @b]
       colors << @a if incl_alpha
 
-      colors.each { |c| hex << c.to_s(16) }
+      colors.each do |c| 
+        color = c.to_s(16)
+        if c < 16
+          hex << "0#{color}"
+        else
+          hex << color
+        end
+      end
+
       return hex
     end
     alias :to_s :to_hex
