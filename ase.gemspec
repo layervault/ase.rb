@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ryan LeFevre"]
   spec.email         = ["meltingice8917@gmail.com"]
   spec.description   = %q{Reader/writer for Adobe Swatch Exchange files}
-  spec.summary       = %q{Reader/writer for Adobe Swatch Exchange files}
-  spec.homepage      = ""
+  spec.summary       = %q{Reader/writer for Adobe Swatch Exchange files. Can be used across the entire Adobe Creative Suite.}
+  spec.homepage      = "http://cosmos.layervault.com/aserb.html"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
