@@ -34,7 +34,7 @@ class ASE
 
         # The title
         @file.write title.encode('UTF-16BE')
-        @file.write 0x00
+        @file.write [0].pack('S>')
 
         palette.colors.each do |name, color|
           # Color start
@@ -48,17 +48,17 @@ class ASE
 
           # Color name
           @file.write name.encode('UTF-16BE')
-          @file.write 0x00
+          @file.write [0].pack('S>')
 
           # Color mode
           @file.write 'RGB '
 
           # Colors
           rgb = color.to_rgb.map { |c| c / 255 }
-          rgb.each { |c| @file.write_float(c) }
+          rgb.each { |c| @file.write [c].pack('F').reverse }
           
           # End of colors
-          @file.write 0x00
+          @file.write [0].pack('S>')
         end
 
         @file.write_ushort 0xC002 # Group end
