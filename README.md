@@ -46,6 +46,7 @@ puts doc['My Colors'].size
 ## Notes
 
 * If the ASE file does not define a palette, and instead simply lists colors, ASE.rb will use `:default` as the palette name.
+* For now, when creating an ASE file, ASE.rb will always store colors as RGB. In the future, it will support writing more color types.
 
 ## Contributing
 
