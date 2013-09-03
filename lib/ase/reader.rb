@@ -40,13 +40,20 @@ class ASE
       def read_palette
         block_start = @file.read_ushort
 
-        title_block_size = @file.read_ulong
-        title = @file.read_string
+        if block_start == 0xC001
+          title_block_size = @file.read_ulong
+          title = @file.read_string
+        else
+          # There is no palette. Instead there is a list of colors and
+          # some kind of "default" palette.
+          title = :default
+          @file.seek -2, IO::SEEK_CUR
+        end
 
         palette = Palette.new(title)
         
         # Read the colors
-        while true
+        loop do
           color_start = @file.read_ushort
           break if color_start == 0xC002
 

@@ -43,6 +43,10 @@ puts doc['My Colors'].size
 #=> 2
 ```
 
+## Notes
+
+* If the ASE file does not define a palette, and instead simply lists colors, ASE.rb will use `:default` as the palette name.
+
 ## Contributing
 
 1. Fork it
