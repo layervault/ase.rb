@@ -28,11 +28,11 @@ class ASE
         g = [0, g, 255].sort[1]
         b = [0, b, 255].sort[1]
 
-        [r, g, b]
+        RGB.new(r, g, b)
       end
 
-      def to_rgba
-        to_rgb + [255]
+      def to_a
+        [@c, @m, @y, @k]
       end
     end
   end

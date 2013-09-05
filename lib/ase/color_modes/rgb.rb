@@ -32,11 +32,11 @@ class ASE
         end
       end
 
-      def to_rgba
-        [@r, @g, @b, 255]
+      def to_rgb
+        self
       end
 
-      def to_rgb
+      def to_a
         [@r, @g, @b]
       end
 

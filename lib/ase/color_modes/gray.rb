@@ -14,11 +14,11 @@ class ASE
       end
 
       def to_rgb
-        [rgb_value] * 3
+        RGB.new(*([rgb_value] * 3))
       end
 
-      def to_rgba
-        to_rgb + [255]
+      def to_a
+        [@value]
       end
 
       private
