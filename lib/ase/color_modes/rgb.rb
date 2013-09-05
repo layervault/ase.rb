@@ -2,7 +2,7 @@ require_relative '../color'
 
 class ASE
   class Color
-    class RGB < Color
+    class RGB
       attr_accessor :r, :g, :b
 
       class << self
