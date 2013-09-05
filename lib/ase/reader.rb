@@ -33,6 +33,9 @@ class ASE
         @palette = Palette.new(:default)
         read_section until @file.eof?
 
+        add_palette @palette if @palettes.length == 0
+        @palette = nil
+
         @file.close
       end
 
