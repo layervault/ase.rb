@@ -49,8 +49,8 @@ describe 'Files' do
       doc = ASE.new
 
       palette = ASE::Palette.new('Test')
-      palette.add 'Red', ASE::Color.new(255, 0, 0)
-      palette.add 'Blue', ASE::Color.new(0, 0, 255)
+      palette.add 'Red', ASE::Color::RGB.new(255, 0, 0)
+      palette.add 'Blue', ASE::Color::RGB.new(0, 0, 255)
 
       doc << palette
 

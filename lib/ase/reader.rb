@@ -68,11 +68,10 @@ class ASE
         color_name = @file.read_string
         color_mode = @file.read(4)
 
-        r, g, b = @file.read(12).scan(/.{1,4}/).map do |c|
-          (c.reverse.unpack('F')[0] * 255).to_i
-        end
+        color = Color.factory(color_mode)
+        color.read!(@file)
 
-        @palette.add color_name, Color.new(r, g, b)
+        @palette.add color_name, color
 
         # Null byte
         @file.seek 2, IO::SEEK_CUR

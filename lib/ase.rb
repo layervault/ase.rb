@@ -1,12 +1,11 @@
 dir_root = File.dirname(File.absolute_path(__FILE__))
 
 require dir_root + "/ase/version"
-require dir_root + "/ase/color"
+require dir_root + "/ase/color_modes/rgb"
 require dir_root + "/ase/file"
 require dir_root + "/ase/palette"
 require dir_root + "/ase/reader"
 require dir_root + "/ase/writer"
-
 
 class ASE
   include Reader
