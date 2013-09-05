@@ -59,25 +59,4 @@ describe ASE do
       expect(palette['White']).to be color
     end
   end
-
-  describe ASE::Color::RGB do
-    it 'can be created with an RGB array' do
-      color1 = ASE::Color::RGB.from_rgba [0, 0, 0]
-      color2 = ASE::Color::RGB.from_rgb [0, 0, 0]
-
-      expect(color1.to_a).to eq([0, 0, 0])
-      expect(color2.to_a).to eq([0, 0, 0])
-    end
-
-    it 'can be created from a hex value' do
-      color1 = ASE::Color::RGB.from_hex('#000000')
-      color2 = ASE::Color::RGB.from_hex('000000')
-      color3 = ASE::Color::RGB.from_hex('#00000000')
-
-      rgb = [0, 0, 0]
-      expect(color1.to_a).to eq(rgb)
-      expect(color2.to_a).to eq(rgb)
-      expect(color3.to_a).to eq([0, 0, 0])
-    end
-  end
 end
