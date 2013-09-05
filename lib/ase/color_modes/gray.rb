@@ -10,7 +10,7 @@ class ASE
       end
 
       def read!(file)
-        @value = file.read(4).reverse.unpack('F')[0]
+        @value = file.read(4).unpack('g')[0]
       end
 
       def to_rgb

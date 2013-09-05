@@ -27,8 +27,8 @@ class ASE
       end
 
       def read!(file)
-        @r, @g, @b = file.read(12).scan(/.{1,4}/).map do |c|
-          (c.reverse.unpack('F')[0] * 255).to_i
+        @r, @g, @b = 3.times.map do |c|
+          (file.read(4).unpack('g')[0] * 255).to_i
         end
       end
 

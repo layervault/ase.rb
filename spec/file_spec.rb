@@ -39,8 +39,8 @@ describe 'Files' do
 
     it 'correctly reads the color values' do
       doc = ASE.from_file('spec/files/control.ase')
-      expect(doc['Simple']['White'].to_rgb).to eq([255, 255, 255])
-      expect(doc['Simple']['Black'].to_rgb).to eq([0, 0, 0])
+      expect(doc['Simple']['White'].to_a).to eq([255, 255, 255])
+      expect(doc['Simple']['Black'].to_a).to eq([0, 0, 0])
     end
   end
 
@@ -84,8 +84,8 @@ describe 'Files' do
 
     it 'writes the correct color values' do
       d = ASE.from_file(@output.path)
-      expect(d['Test']['Red'].to_rgb).to eq([255, 0, 0])
-      expect(d['Test']['Blue'].to_rgb).to eq([0, 0, 255])
+      expect(d['Test']['Red'].to_rgb.to_a).to eq([255, 0, 0])
+      expect(d['Test']['Blue'].to_rgb.to_a).to eq([0, 0, 255])
     end
   end
 end

@@ -13,20 +13,20 @@ class ASE
       end
 
       def read!(file)
-        @c, @m, @y, @k = file.read(16).scan(/.{1,4}/).map do |c|
-          c.reverse.unpack('F')[0]
+        @c, @m, @y, @k = 4.times.map do
+          file.read(4).unpack('g')[0]
         end
       end
 
       def to_rgb
-        r = 1 - (c * (1 - k) + k) * 255
-        g = 1 - (m * (1 - k) + k) * 255
-        b = 1 - (y * (1 - k) + k) * 255
+        r = (1 - (@c * (1 - @k) + @k)) * 255
+        g = (1 - (@m * (1 - @k) + @k)) * 255
+        b = (1 - (@y * (1 - @k) + @k)) * 255
 
         # Clamp
-        r = [0, r, 255].sort[1]
-        g = [0, g, 255].sort[1]
-        b = [0, b, 255].sort[1]
+        r = [0, r, 255].sort[1].to_i
+        g = [0, g, 255].sort[1].to_i
+        b = [0, b, 255].sort[1].to_i
 
         RGB.new(r, g, b)
       end

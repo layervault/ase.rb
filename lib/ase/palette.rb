@@ -1,5 +1,7 @@
 class ASE
   class Palette
+    include Enumerable
+
     attr_accessor :name, :colors
 
     def initialize(name)
@@ -25,6 +27,10 @@ class ASE
       @colors.length
     end
     alias :size :length
+
+    def each(&block)
+      @colors.each(&block)
+    end
 
     def method_missing(method, *args, &block)
       if @colors.has_key?(method.to_s)

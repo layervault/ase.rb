@@ -45,7 +45,7 @@ class ASE
           @file.write 'RGB '
 
           # Colors
-          rgb = color.to_rgb.map { |c| c.to_f / 255 }
+          rgb = color.to_rgb.to_a.map { |c| c.to_f / 255 }
           rgb.each { |c| @file.write [c].pack('F').reverse }
           
           # End of colors
