@@ -30,52 +30,52 @@ class ASE
 
         block_count = @file.read_ulong
         
-        read_palette until @file.eof?
+        @palette = Palette.new(:default)
+        read_section until @file.eof?
 
         @file.close
       end
 
       private
 
-      def read_palette
+      def read_section
         block_start = @file.read_ushort
 
-        if block_start == 0xC001
-          title_block_size = @file.read_ulong
-          title = @file.read_string
-        else
-          # There is no palette. Instead there is a list of colors and
-          # some kind of "default" palette.
-          title = :default
-          @file.seek -2, IO::SEEK_CUR
+        case block_start
+        when 0xC001 then start_palette
+        when 1      then read_color
+        when 0xC002 then end_palette
         end
+      end
 
-        palette = Palette.new(title)
-        
-        # Read the colors
-        loop do
-          color_start = @file.read_ushort
-          break if color_start == 0xC002
+      def start_palette
+        title_block_size = @file.read_ulong
+        title = @file.read_string
 
-          color_size = @file.read_ulong
-          color_name = @file.read_string
-          color_mode = @file.read(4)
+        @palette = Palette.new(title)
+      end
 
-          r, g, b = @file.read(12).scan(/.{1,4}/).map do |c|
-            (c.reverse.unpack('F')[0] * 255).to_i
-          end
-
-          palette.add color_name, Color.new(r, g, b)
-
-          # Null byte
-          @file.seek 2, IO::SEEK_CUR
-        end
-
+      def end_palette
         # Group end block
         @file.seek 4, IO::SEEK_CUR
-        
-        add_palette palette
-        return true
+        add_palette @palette
+
+        @palette = Palette.new(:default)
+      end
+
+      def read_color
+        color_size = @file.read_ulong
+        color_name = @file.read_string
+        color_mode = @file.read(4)
+
+        r, g, b = @file.read(12).scan(/.{1,4}/).map do |c|
+          (c.reverse.unpack('F')[0] * 255).to_i
+        end
+
+        @palette.add color_name, Color.new(r, g, b)
+
+        # Null byte
+        @file.seek 2, IO::SEEK_CUR
       end
     end
   end
