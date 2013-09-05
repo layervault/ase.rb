@@ -24,7 +24,7 @@ class ASE
       private
 
       def rgb_value
-        (@value * 255).round
+        (@value * 255).to_i
       end
     end
 
