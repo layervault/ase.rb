@@ -10,7 +10,12 @@ class ASE
       end
 
       def read!(file)
-        @value = file.read(4).unpack('g')[0]
+        @value = file.read(4).unpack('g')[0].round(4)
+      end
+
+      def write!(file)
+        file.write('Gray')
+        to_a.each { |c| file.write [c].pack('g') }
       end
 
       def to_rgb

@@ -50,7 +50,8 @@ describe 'Files' do
 
       palette = ASE::Palette.new('Test')
       palette.add 'Red', ASE::Color::RGB.new(255, 0, 0)
-      palette.add 'Blue', ASE::Color::RGB.new(0, 0, 255)
+      palette.add 'Blue', ASE::Color::CMYK.new(0.91, 0.68, 0.2, 0)
+      palette.add 'Blah', ASE::Color::Gray.new(0.5)
 
       doc << palette
 
@@ -73,7 +74,7 @@ describe 'Files' do
 
     it 'writes the correct number of colors' do
       d = ASE.from_file(@output.path)
-      expect(d['Test'].size).to be 2
+      expect(d['Test'].size).to be 3
     end
 
     it 'writes the correct color names' do
@@ -84,8 +85,16 @@ describe 'Files' do
 
     it 'writes the correct color values' do
       d = ASE.from_file(@output.path)
-      expect(d['Test']['Red'].to_rgb.to_a).to eq([255, 0, 0])
-      expect(d['Test']['Blue'].to_rgb.to_a).to eq([0, 0, 255])
+      expect(d['Test']['Red'].to_a).to eq([255, 0, 0])
+      expect(d['Test']['Blue'].to_a).to eq([0.91, 0.68, 0.2, 0])
+      expect(d['Test']['Blah'].to_a).to eq([0.5])
+    end
+
+    it 'writes the correct color types' do
+      d = ASE.from_file(@output.path)
+      expect(d['Test']['Red']).to be_an_instance_of(ASE::Color::RGB)
+      expect(d['Test']['Blue']).to be_an_instance_of(ASE::Color::CMYK)
+      expect(d['Test']['Blah']).to be_an_instance_of(ASE::Color::Gray)
     end
   end
 end

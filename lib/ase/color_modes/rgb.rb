@@ -32,6 +32,11 @@ class ASE
         end
       end
 
+      def write!(file)
+        file.write 'RGB '
+        to_a.each { |c| file.write [c.to_f / 255].pack('g') }
+      end
+
       def to_rgb
         self
       end

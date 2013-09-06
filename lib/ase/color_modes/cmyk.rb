@@ -14,8 +14,13 @@ class ASE
 
       def read!(file)
         @c, @m, @y, @k = 4.times.map do
-          file.read(4).unpack('g')[0]
+          file.read(4).unpack('g')[0].round(4)
         end
+      end
+
+      def write!(file)
+        file.write 'CMYK'
+        to_a.each { |c| file.write [c].pack('g') }
       end
 
       def to_rgb
