@@ -50,6 +50,7 @@ puts doc['My Colors'].size
 * If the ASE file does not define a palette, and instead simply lists colors, ASE.rb will use `:default` as the palette name.
 * ASE.rb does not support LAB colors yet.
 * Because reading & writing CMYK/LAB colors is dependent on your color profile, the output might be different than what is shown in an Adobe application. Color profile support might be added in the future.
+* Gray and Grey are interchangeable in ASE.rb
 
 ## Contributing
 
