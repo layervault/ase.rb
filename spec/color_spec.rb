@@ -44,6 +44,7 @@ describe ASE::Color do
   describe ASE::Color::Gray do
     it "works with the color factory" do
       expect(ASE::Color.factory('Gray')).to be_an_instance_of(ASE::Color::Gray)
+      expect(ASE::Color.factory('Grey')).to be_an_instance_of(ASE::Color::Grey)
     end
 
     it "has a readable value" do

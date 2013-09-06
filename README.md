@@ -24,8 +24,10 @@ Or install it yourself as:
 doc = ASE.new
 
 palette = ASE::Palette.new('My Colors')
-palette.add 'Black', ASE::Color.new(0, 0, 0)
-palette.add 'Red', ASE::Color.from_hex('#ff0000')
+palette.add 'Black', ASE::Color::RGB.new(0, 0, 0)
+palette.add 'Red', ASE::Color::RGB.from_hex('#ff0000')
+palette.add 'Blue', ASE::Color::CMYK.new(0.92, 0.68, 0.2, 0)
+palette.add 'Light Gray', ASE::Color::Gray.new(0.75)
 
 doc << palette
 doc.to_file('path/to/file.ase')
@@ -36,7 +38,7 @@ doc.to_file('path/to/file.ase')
 ``` ruby
 doc = ASE.from_file('path/to/file.ase')
 
-puts doc['My Colors']['Red'].to_rgb
+puts doc['My Colors']['Red'].to_a
 #=> [255, 0, 0]
 
 puts doc['My Colors'].size
@@ -46,7 +48,8 @@ puts doc['My Colors'].size
 ## Notes
 
 * If the ASE file does not define a palette, and instead simply lists colors, ASE.rb will use `:default` as the palette name.
-* For now, when creating an ASE file, ASE.rb will always store colors as RGB. In the future, it will support writing more color types.
+* ASE.rb does not support LAB colors yet.
+* Because reading & writing CMYK/LAB colors is dependent on your color profile, the output might be different than what is shown in an Adobe application. Color profile support might be added in the future.
 
 ## Contributing
 
