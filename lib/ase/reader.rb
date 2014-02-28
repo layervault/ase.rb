@@ -21,7 +21,7 @@ class ASE
       end
 
       def read!
-        raise "Must specify an output file" if @file.nil?
+        raise "Must specify an input file" if @file.nil?
         @file = File.new(@file, 'rb')
 
         # Signature and version, who cares?
